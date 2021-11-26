@@ -1,0 +1,20 @@
+header.header
+  nav.navbar
+    a.nav-logo(href='/admin') Bienvenido #{usuario.usuario}
+    ul.nav-menu
+      li.nav-item
+        a.nav-link(href='/admin') Inicio
+          i.fas.fa-box-open
+      li.nav-item
+        a.nav-link(href='/admin/obtener-clientes') Clientes
+          i.fas.fa-user-plus
+      li.nav-item
+        a.nav-link(href='/admin/obtener-pedidos') Pedidos
+          i.fas.fa-shopping-cart
+      li.nav-item
+        a(href="/admin/logout").nav-link.pointer.cerrar Cerrar sesión
+          i.fas.fa-sign-out-alt
+    .hamburguesa
+      span.bar
+      span.bar
+      span.bar

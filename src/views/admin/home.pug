@@ -1,0 +1,39 @@
+extends ../layout/main
+block content
+    include ../includes/navbar
+    .contenedor     
+        h1.titulo Listado de productos disponibles 
+            i.fas.fa-box-open
+        p.subtitulo Agregar nuevos productos 
+            a(href="/admin/producto-agregar").button 
+                i.fas.fa-plus
+    section.contenedor-home
+        if(!productos.length)
+            h1 No hay productos registrados
+        else
+            .margin-y
+                table.table-home
+                    thead
+                        tr
+                        th Nombre
+                        th Precio
+                        th  Categoria
+                        th Descripción
+                        th Imagen
+                        th Acciones
+                    tbody.margin-y
+                        for product of productos
+                            tr
+                                td #{product.nombre}
+                                td 
+                                    strong $ #{product.precio}
+                                td #{product.categoria}
+                                td #{product.descripcion}
+                                td 
+                                    img.img-fluid(src=product.imagen width="50px")
+                                td
+                                    a.boton-accion.red(onClick="return confirm('¿Esta seguro en eliminar el producto?')" href=`/admin/producto-eliminar/${product.id}` ) Eliminar 
+                                        i.fas.fa-trash-alt.red
+                                    a.boton-accion.blue(href=`/admin/producto-editar/${product.id}` ) Editar 
+                                        i.fas.fa-edit.blue
+

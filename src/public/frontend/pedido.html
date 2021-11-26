@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comercy Lite | Procesar pedido</title>
+    <link rel="icon" href="img/favicon.jpg">
+    <link rel="stylesheet" href="styles/materialize.css">
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/materializecssicons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body">
+<nav id="nav">
+    <div class="nav-wrapper">
+      <a href="index.html" class="nombre">Comercy Lite</a>
+      <a href="#" data-target="menu-sidebar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="container center hide-on-med-and-down" style="margin-left: 25em;">
+        <li>
+          <a href="index.html">Inicio <i class="material-icons right">home</i></a>
+        </li>
+        <li>
+          <a href="productos.html"> <i class="material-icons right">store</i> Productos</a>
+        </li>
+        </li>
+      </ul>
+      <ul class="right">
+        <ul class="guides" style="border: none">
+          <li class="usuario-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger tooltipped" data-target="modal-usuario" data-position="bottom"
+              data-tooltip="Cuenta">
+              <i class="material-icons">account_circle</i>
+            </a>
+          </li>
+          <li class="usuario-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger tooltipped" data-target="modal-cart" id="cart" data-position="bottom"
+              data-tooltip="Carrito de compras">
+              <i class="material-icons">shopping_cart</i>
+            </a>
+          </li>
+          <li class="usuario-autenticado" style="display: none" ;>
+            <a href="#" class="tooltipped" id="logout" data-position="bottom" data-tooltip="Cerrar sesión">
+              <i class="material-icons">logout</i>
+            </a>
+          </li>
+          <li class="usuario-no-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger btn black-text" data-target="modal-login">Iniciar sesión <i class="material-icons right">account_circle
+            </i></a>
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </nav>
+  <ul class="sidenav center" id="menu-sidebar">
+    <li><a href="index.html">Inicio <i class="material-icons">home</i> </a></li>
+    <li><a href="productos.html">Productos <i class="material-icons left">store</i></a></li>
+  </ul>
+    <main id="main">
+      <div id="modal-login" class="modal modal-fixed-footer">
+        <div class="modal-content login-contenido">
+          <form id="formulario-login">
+            <h4 class="modal-heading text-center">Inciar sesión <i class="material-icons">security</i></h4>
+            <br />
+            <div class="input-field">
+              <i class="material-icons right">account_circle</i>
+              <input type="email" id="login-email" autocomplete="off" required />
+              <label for="login-email">Correo electronico</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons right">lock_outline</i>
+              <input type="password" id="login-clave" autocomplete="off" required />
+              <label for="login-clave">Clave</label>
+            </div>
+            </p> 
+              <div class="text-center">
+                <div class="text-center">
+                  <small class="login-error center-align errors"></small>
+                </div>
+              </div>
+            <br />
+            <div class="progress login-progress" style="background: none !important; visibility: hidden">
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+              <div class="text-center">
+                <button class="btn z-depth-0 boton-enviar">
+                  <i class="material-icons">check</i>
+                </button>
+              </div>
+            <p class="text-center">
+              <a href="#" class="blue-grey-text forget-pass" onclick="mostrarRegistro()">¿No tienes cuenta? Registrate aquí</a>
+            </p>
+          </form>
+        </div>
+        <!-- Modal para registro -->
+        <div class="modal-content registro-contenido" style="display: none">
+          <h4 class="modal-heading text-center">Registrate aqui  <i class="material-icons">person_add</i> </h4>
+          <br />
+          <form id="formulario-registro">
+            <div class="input-field">
+              <i class="material-icons right">person_pin</i>
+              <input type="text" id="registro-nombre" autocomplete="off" required />
+              <label for="registro-nombre">Nombre</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons right">email</i>
+              <input type="email" id="registro-email" autocomplete="off" required />
+              <label for="registro-email">Dirección de correo electronico</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons right">lock</i>
+              <input type="password" id="registro-clave" required />
+              <label for="registro-clave">Clave</label>
+            </div>
+            <div class="input-field">
+              <i class="material-icons right">lock_outline</i>
+              <input type="password" id="registro-clave-repetir" required />
+              <label for="registro-clave-repetir">Repetir clave</label>
+            </div>
+              <div class="text-center">
+            <small class="registro-error center-align errors"></small>
+              </div>
+            <br />
+            <div class="progress registro-progress" style="background: none !important; visibility: hidden">
+              <div class="indeterminate blue darken-3"></div>
+            </div>
+           <div class="text-center">
+            <button class="btn z-depth-0 boton-enviar">
+              <i class="material-icons">arrow_forward</i>
+            </button>
+           </div>
+            <p class="text-center">
+              <a href="#" class="blue-grey-text" onclick="usuarioRegistrado()">¿Ya tienes cuenta? Inicia sesión</a>
+            </p>
+          </form>
+        </div>
+      </div>
+      <div id="modal-usuario" class="modal center-align">
+        <div class="modal-content center-align">
+          <h4 class="modal-heading">Usuario autenticado <i class="material-icons"> account_circle </i> </h4>
+          <div class="row">
+            <p class="detalles-usuario" style="margin-bottom: 3em;"></p>
+            <a href="cuenta.html" style="margin-top:1em;"> <i class="material-icons">arrow_forward</i> </a>
+          </div>
+        </div>
+      </div>
+          <!-- Modal para carrito de compras -->
+          <div id="modal-cart" class="modal modal-fixed-footer">
+            <div class="modal-content">
+              <div class="mostrar-carrito" style="display: none">
+                <h6 class="modal-heading">Carrito de compras</h6>
+                <br />
+                <table class="centered">
+                  <thead>
+                    <tr>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                      <th>Categoría</th>
+                      <th>Acción</th>
+                      <th>Precio</th>
+                      <th>Agregado el</th>
+                    </tr>
+                  </thead>
+                  <tbody class="contenedor-cart"></tbody>
+                  <tr class="bottom-table">
+                    <td></td>
+                    <td style="text-align: center">
+                      <h6>Precio total :</h6>
+                    </td>
+                    <td>
+                      <h6 class="contador-precio-total"></h6>
+                    </td>
+                    <td>
+                      <a href="pedido.html" class="btn-pedido btn z-depth-0"><i class="material-icons">shopping_cart</i> </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="ocultar-carrito center" style="display: none">
+                <h5>El carrito de compras esta vació</h5>
+                <img src="img/carritoVacio.png" width="200" alt="carrito vacio" /> <br />
+                <a href="productos.html" class="btn">Comprar ahora <i class="material-icons right">store</i></a>
+              </div>
+            </div>
+          </div>
+        <div class="pedido-heading " >
+            <h4 class="text-center" style="margin: 20px;">Procesar pedido</h4>
+        </div>
+        <hr>
+        <section id="pedido-seccion">
+            <!-- Resumen de productos  -->
+            <div class="row">
+                <div class="col l4 m12 s12 resumen-pedido">
+                    <table class="centered">
+                        <h4 class="text-center"><b>Resumen de productos</b></h4>
+                     <div class="tabla-resumen">
+                          <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Categoría</th>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody class="pedido-carrito">
+                        </tbody>
+                        <tr class="bottom-table">
+                            <td>
+                            </td>
+                            <td class="text-center">
+                                <h6>Precio total:</h6>
+                            </td>
+                            <td>
+                                <h6 class="precio-total-carrito"> </h6>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                     </div>
+                    </table>
+                    <div class="carrito-compras-vacio" >
+                      <h6 class="carrito-compras-vacio-heading text-center" style="font-weight: bold">
+                        No tienes productos en tu carrito de compras
+                      </h6>
+                    </div>
+                </div>
+    
+                <div class="col l7 m12 s12">
+                    <div class="row">
+                        <h5 class="text-center"><b>Dirección de envio</b></h5>
+                        <div class="row">
+                            <div class="input-field col s6">
+                              <i class="material-icons right">location_on</i>
+                                <input id="ciudad" type="text" required>
+                                <label class="active" for="Ciudad">Ciudad</label>
+                            </div>
+                    <div class="input-field col s6">
+                      <i class="material-icons right">my_location</i>
+                      <select id="estado" required>
+                        <option value="" disabled selected>Seleccionar estado</option>
+                        <option value="Amazonas">Amazonas</option>
+                        <option value="Anzoátegui	">Anzoátegui	</option>
+                        <option value="Apure">Apure</option>
+                        <option value="Aragua">Aragua</option>
+                        <option value="Barinas">Barinas</option>
+                        <option value="Bolívar">Bolívar</option>
+                        <option value="Carabobo">Carabobo</option>
+                        <option value="Cojedes">Cojedes</option>
+                        <option value="Delta Amacuro">Delta Amacuro</option>
+                        <option value="Distrito Capital">Distrito Capital</option>
+                        <option value="Falcón">Falcón</option>
+                        <option value="Guárico">Guárico</option>
+                        <option value="Lara">Lara</option>
+                        <option value="Mérida">Mérida</option>
+                        <option value="Miranda">Miranda</option>
+                        <option value="Monagas">Monagas</option>
+                        <option value="Nueva Esparta">Nueva Esparta</option>
+                        <option value="Portuguesa">Portuguesa</option>
+                        <option value="Sucre">Sucre</option>
+                        <option value="Táchira">Táchira</option>
+                        <option value="Trujillo">Trujillo</option>
+                        <option value="Vargas">Vargas</option>
+                        <option value="Yaracuy">Yaracuy</option>
+                        <option value="Zulia">Zulia</option>
+                      </select>
+                      <label>Seleccionar estado</label>
+                    </div>
+                        </div>
+                        <div class="input-field col s6">
+                          <i class="material-icons right">perm_contact_calendar</i>
+                            <input id="persona" type="text" required>
+                            <label class="active" for="persona" autocomplete="off">Persona que recibe</label>
+                        </div>
+                        <div class="input-field col s6">
+                          <i class="material-icons right">phone_android</i>
+                            <input id="telefono" type="tel" required>
+                            <label for="telefono">Telefono</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                          <i class="material-icons right">location_city</i>
+                            <textarea required id="direccion" class="materialize-textarea"></textarea>
+                            <label for="direccion">Dirección</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                  <p class="errors text-center" id="direccion-error" style="display: block"></p>
+              </div>
+            </div>
+        </section>
+        <div class="pedido-heading text-center" >
+            <h4 style="margin: 20px;">Tipo de pago</h4>
+        </div>
+        <hr>
+        <section id="pedido-seccion">
+            <!-- Tipo de pago  -->
+            <div class="row">
+                <div class="col form-main l7 m12 s12">
+                    <div class="row">
+                        <div class="input-field col l6 s6">
+                            <form action="#">
+                                <p>
+                                    <label id="pago-efectivo">
+                                      <input class="with-gap" id="pago-efectivo" name="tipo-pago" type="radio" value="transferencia"
+                                      onclick="seleccionarPagoTransferencia()" />
+                                      <span>Transferencia</span>
+                                      <i class="material-icons left">payment</i>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label id="efectivo-tipo">
+                                        <input class="with-gap" id="efectivo-tipo" name="tipo-pago" type="radio" value="efectivo"
+                                            onclick="seleccionarPagoEfectivo()" />
+                                        <span>Efectivo</span>
+                                        <i class="material-icons left">attach_money</i>
+                                    </label>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="pago-transferencia-accion" class="form-main" style="display: none;">
+                        <div>
+                            <div style="margin-bottom: 20px;padding: 7px 0;font-size: 24px;">
+                                <h5>Súbir imagen de transferencia</h5>
+                            </div>
+                                <div class="row">
+                                    <div class="input-field col l6 s12">
+                                      <i class="material-icons left"> file_upload</i>
+                                        <input class="file" id="archivo" type="file">
+                                    </div>
+                                    <div class="input-field col l6 s12">
+                                        <i class="material-icons right">description</i>
+                                      <input type="text" id="referencia">
+                                      <label class="active" for="referencia">Referencia de la transferencia</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col l6 s6">
+                                        <br>
+                                        <button type="button" class="btn"  onclick="registrarPedido('Transferencia')" title="Registrar pedido">Registrar pedido <i class="material-icons right">send
+                                        </i></button></div>
+                                </div>
+                        </div>
+                    </div>
+                    <div id="pago-efectivo-accion" style="display: none;">
+                        <div class="row">
+                            <div class="input-field col l6 s6">
+                                <br>
+                                <a class="btn" onclick="registrarPedido('Efectivo')" title="Registrar pedido">Registrar pedido <i class="material-icons right">send
+                                </i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Soporte</h5>
+            <p class="grey-text text-lighten-4 footer-address"></p>
+            <p>
+            <i class="fa fa-map-marker"></i> Dirección: Av. Universitaria #1234
+            </p>
+            <p class="footer-phone">
+              <p><i class="fa fa-phone"></i>Télefono +584121876543</p>
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Nuestras redes</h5>
+            <a class="grey-text text-lighten-3" target="_blank" href="https://www.facebook.com/"><i
+                class="fa fa-facebook"></i></a>
+            <a class="grey-text text-lighten-3" target="_blank" href="https://www.instagram.com/"><i
+                class="fa fa-instagram"></i></a>
+            <a class="grey-text text-lighten-3" target="_blank" href="https://www.twitter.com/"><i
+                class="fa fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          <a href="" target="_blank">Copyright © 1999-2021 Comercy Lite.</a>
+          <a class="grey-text text-lighten-4 right" href="#!">info@comercy.com</a>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let toolTip = document.querySelectorAll('.tooltipped');
+            let instances = M.Tooltip.init(toolTip);
+        });
+    </script>
+    <script src="js/autenticacion.js"></script>
+    <script src="js/pedido.js"></script>
+    </body>
+
+</html>

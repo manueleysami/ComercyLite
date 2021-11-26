@@ -1,0 +1,29 @@
+extends ../layout/main
+block content
+    include ../includes/navbar
+    .contenedor     
+        h1.titulo Listado de clientes disponibles 
+            i.fas.fa-users
+    section.contenedor-home
+        if(!clientes.length)
+            h1 No existen clientes registrados actualmente
+        else
+            table(style="margin:0 auto;").table-cliente
+                thead
+                    tr
+                    th Nombre
+                    th Usuario
+                    th Fecha
+                    th Acciones
+                tbody
+                     for cliente of clientes
+                        tr
+                            td #{cliente.nombre}
+                            td 
+                                strong #{cliente.usuario}
+                            td 
+                                strong #{new Date(cliente.fecha).toLocaleDateString()}
+                            td
+                                a.boton-accion.red(onClick="return confirm('¿Esta seguro en eliminar el cliente?')" href=`/admin/eliminar-cliente/${cliente.id}` ) Eliminar 
+                                    i.fas.fa-user
+

@@ -1,0 +1,43 @@
+extends ../layout/main
+block content
+    include ../includes/navbar
+    .contenedor  
+        .container-contacto
+            .main-contacto
+                form(method="POST" action=`/admin/producto-editar-put/${producto.id}`).formulario
+                    if(mensaje)
+                        .mensaje-error #{mensaje}
+                    span.formulario-title  Editar producto 
+                        span.icono
+                            i.fas.fa-edit
+                        p(style="margin-top:1em;") Completa los datos para editar el producto
+                        if(mensaje)
+                            .mensaje-error #{mensaje}
+                    .input-group.bg1
+                        span.label-input Nombre
+                        input.input-form(required type='text' value=producto.nombre name='nombre' placeholder='Ingrese el nombre del producto')
+                    .input-group.bg1.input
+                        span.label-input Precio ($)
+                        input.input-form(required type='number' min="1" value=producto.precio name='precio' placeholder='Ingrese el precio ')
+                    .input-group.bg1.input
+                        span.label-input Imagen
+                        input.input-form(required type='url' name='imagen' value=producto.imagen placeholder='Ingrese la URL del producto')
+                    .input-group.input-form-select.bg1
+                        span.label-input Categorias
+                        div
+                        select(name='categoria' value=producto.categoria)
+                            option(value='' disabled selected) Seleccionar categoria
+                            option(value="Electronica" selected=producto.categoria == 'Electronica') Electronica
+                            option(value="Ropa y accesorios"  selected=producto.categoria == "Ropa y accesorios") Ropa y accesorios
+                            option(value="Muebles" selected=producto.categoria == "Muebles") Muebles
+                            option(value="Industrial" selected=producto.categoria == "Industrial") Industrial
+                            option(value="Alimentos" selected=producto.categoria == "Alimentos") Alimentos
+                            option(value="Vehiculos" selected=producto.categoria == "Vehiculos") Vehiculos
+                            option(value="Otros" selected=producto.categoria == "Otros") Otros
+                    .input-group.bg0(style='margin-top: 1em; background: #f7f7f7')
+                        span.label-input Descripción
+                        textarea.input-form(name='descripcion' placeholder='Ingresar la descripción...') #{producto.descripcion}
+                    .container-contacto-form-btn
+                        button(type="submit").formulario-btn
+                                span Editar producto  
+                                    i.fas.fa-edit

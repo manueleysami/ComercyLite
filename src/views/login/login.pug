@@ -1,0 +1,12 @@
+extends ../layout/login
+block content
+    .main
+        
+        p.texto(align='center')  Sección Administrativa
+         if(mensaje)
+                p(align="center").mensaje-error #{mensaje}
+        form(method="POST" action="/admin/login").form
+            input.input(name="usuario" required type='text' align='center' placeholder='Usuario')
+            input.input-password(name="clave" required type='password' align='center' placeholder='Clave')
+            button.boton(align='center' type="submit") Iniciar sesión
+           

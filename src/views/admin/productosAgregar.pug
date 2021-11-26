@@ -1,0 +1,41 @@
+extends ../layout/main
+block content
+    include ../includes/navbar
+    .contenedor  
+        .container-contacto
+            .main-contacto
+                form(method="POST" action="/admin/producto-agregar").formulario
+                    span.formulario-title  Agregar nuevo producto 
+                        span.icono
+                            i.fas.fa-plus-circle
+                        p(style="margin-top:1em;") Ingresa los datos solicitados para agregar nuevo producto
+                         if(mensaje)
+                            .mensaje-error #{mensaje}
+                    .input-group.bg1
+                        span.label-input Nombre
+                        input.input-form(required type='text' name='nombre' placeholder='Ingrese el nombre del producto')
+                    .input-group.bg1.input
+                        span.label-input Precio ($)
+                        input.input-form(required type='number' min="1" name='precio' placeholder='Ingrese el precio ')
+                    .input-group.bg1.input
+                        span.label-input Imagen
+                        input.input-form(required type='url' name='imagen' placeholder='Ingrese la URL del producto')
+                    .input-group.input-form-select.bg1
+                        span.label-input Categorias
+                        div
+                        select(name='categoria')
+                            option(value='' disabled selected) Seleccionar categoria
+                            option Electronica
+                            option Ropa y accesorios
+                            option Muebles
+                            option Industrial
+                            option Alimentos
+                            option Vehiculos
+                            option Otros
+                    .input-group.bg0(style='margin-top: 1em; background: #f7f7f7')
+                        span.label-input Descripción
+                        textarea.input-form(name='descripcion' placeholder='Ingresar la descripción...')
+                    .container-contacto-form-btn
+                        button(type="submit").formulario-btn
+                                span Agregar producto  
+                                    i.fas.fa-box-open

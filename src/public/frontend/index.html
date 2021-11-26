@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comercy Lite | La mejor tienda en línea</title>
+  <link rel="icon" href="img/favicon.jpg" />
+  <link type="text/css" rel="stylesheet" href="styles/sliderstyle.css" />
+  <link rel="stylesheet" href="styles/materialize.css" />
+  <link type="text/css" rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet" href="styles/materializecssicons.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-wrapper">
+      <a href="index.html" class="nombre">Comercy Lite</a>
+      <a href="#" data-target="menu-sidebar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="container center hide-on-med-and-down" style="margin-left: 25em;">
+        <li>
+          <a href="index.html">Inicio <i class="material-icons right">home</i></a>
+        </li>
+        <li>
+          <a href="productos.html"> <i class="material-icons right">store</i> Productos</a>
+        </li>
+        </li>
+      </ul>
+      <ul class="right">
+        <ul class="guides" style="border: none">
+          <li class="usuario-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger tooltipped" data-target="modal-usuario" data-position="bottom"
+              data-tooltip="Cuenta">
+              <i class="material-icons">account_circle</i>
+            </a>
+          </li>
+          <li class="usuario-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger tooltipped" data-target="modal-cart" id="cart" data-position="bottom"
+            data-tooltip="Carrito de compras">
+            <i class="material-icons">shopping_cart</i>
+          </a>
+        </li>
+        <li class="usuario-autenticado" style="display: none" ;>
+          <a href="#" class="tooltipped" id="logout" data-position="bottom" data-tooltip="Cerrar sesión">
+            <i class="material-icons">logout</i>
+          </a>
+        </li>
+          <li class="usuario-no-autenticado" style="display: none" ;>
+            <a href="#" class="modal-trigger btn black-text" data-target="modal-login">Iniciar sesión <i class="material-icons right">account_circle
+            </i></a>
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </nav>
+  <ul class="sidenav center" id="menu-sidebar">
+    <li><a href="index.html">Inicio <i class="material-icons">home</i> </a></li>
+    <li><a href="productos.html">Productos <i class="material-icons left">store</i></a></li>
+  </ul>
+  <!-- Modal para Iniciar Sesión -->
+  <main id="main">
+    <div id="modal-login" class="modal modal-fixed-footer">
+      <div class="modal-content login-contenido">
+        <form id="formulario-login">
+          <h4 class="modal-heading text-center">Inciar sesión <i class="material-icons">security</i></h4>
+          <br />
+          <div class="input-field">
+            <i class="material-icons right">account_circle</i>
+            <input type="email" id="login-email" autocomplete="off" required />
+            <label for="login-email">Correo electronico</label>
+          </div>
+          <div class="input-field">
+            <i class="material-icons right">lock_outline</i>
+            <input type="password" id="login-clave" autocomplete="off" required />
+            <label for="login-clave">Clave</label>
+          </div>
+          </p> 
+            <div class="text-center">
+              <div class="text-center">
+                <small class="login-error center-align errors"></small>
+              </div>
+            </div>
+          <br />
+          <div class="progress login-progress" style="background: none !important; visibility: hidden">
+            <div class="indeterminate blue darken-3"></div>
+          </div>
+            <div class="text-center">
+              <button class="btn z-depth-0 boton-enviar">
+                <i class="material-icons">check</i>
+              </button>
+            </div>
+          <p class="text-center">
+            <a href="#" class="blue-grey-text forget-pass" onclick="mostrarRegistro()">¿No tienes cuenta? Registrate aquí</a>
+          </p>
+        </form>
+      </div>
+      <!-- Modal para registro -->
+      <div class="modal-content registro-contenido" style="display: none">
+        <h4 class="modal-heading text-center">Registrate aqui  <i class="material-icons">person_add</i> </h4>
+        <br />
+        <form id="formulario-registro">
+          <div class="input-field">
+            <i class="material-icons right">person_pin</i>
+            <input type="text" id="registro-nombre" autocomplete="off" required />
+            <label for="registro-nombre">Nombre</label>
+          </div>
+          <div class="input-field">
+            <i class="material-icons right">email</i>
+            <input type="email" id="registro-email" autocomplete="off" required />
+            <label for="registro-email">Dirección de correo electronico</label>
+          </div>
+          <div class="input-field">
+            <i class="material-icons right">lock</i>
+            <input type="password" id="registro-clave" required />
+            <label for="registro-clave">Clave</label>
+          </div>
+          <div class="input-field">
+            <i class="material-icons right">lock_outline</i>
+            <input type="password" id="registro-clave-repetir" required />
+            <label for="registro-clave-repetir">Repetir clave</label>
+          </div>
+            <div class="text-center">
+          <small class="registro-error center-align errors"></small>
+            </div>
+          <br />
+          <div class="progress registro-progress" style="background: none !important; visibility: hidden">
+            <div class="indeterminate blue darken-3"></div>
+          </div>
+         <div class="text-center">
+          <button class="btn z-depth-0 boton-enviar">
+            <i class="material-icons">arrow_forward</i>
+          </button>
+         </div>
+          <p class="text-center">
+            <a href="#" class="blue-grey-text" onclick="usuarioRegistrado()">¿Ya tienes cuenta? Inicia sesión</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal para detalles del usuario -->
+    <div id="modal-usuario" class="modal center-align">
+      <div class="modal-content center-align">
+        <h4 class="modal-heading">Usuario autenticado <i class="material-icons"> account_circle </i> </h4>
+        <div class="row">
+          <p class="detalles-usuario" style="margin-bottom: 3em;"></p>
+          <a href="cuenta.html" style="margin-top:1em;"><i class="material-icons">arrow_forward</i> </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para carrito de compras -->
+    <div id="modal-cart" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <div class="mostrar-carrito" style="display: none">
+          <h6 class="modal-heading">Carrito de compras</h6>
+          <br />
+          <table class="centered">
+            <thead>
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Acción</th>
+                <th>Precio</th>
+                <th>Agregado el</th>
+              </tr>
+            </thead>
+            <tbody class="contenedor-cart"></tbody>
+            <tr class="bottom-table">
+              <td></td>
+              <td style="text-align: center">
+                <h6>Precio total :</h6>
+              </td>
+              <td>
+                <h6 class="contador-precio-total"></h6>
+              </td>
+              <td>
+                <a href="pedido.html" class="btn-pedido btn z-depth-0"><i class="material-icons">shopping_cart</i> </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="ocultar-carrito center" style="display: none">
+          <h5>El carrito de compras esta vació</h5>
+          <img src="img/carritoVacio.png" width="200" alt="carrito vacio" /> <br />
+          <a href="productos.html" class="btn">Comprar ahora <i class="material-icons right">store</i></a>
+        </div>
+      </div>
+    </div>
+    <section>
+      <div id="slider">
+        <figure>
+          <a href="productos.html"><img src="img/sliders/slider-1.webp" alt="Slider #1" /></a>
+          <a href="productos.html"><img src="img/sliders/slider-2.webp" alt="Slider #2" /></a>
+          <a href="productos.html"><img src="img/sliders/slider-3.webp" alt="Slider #3" /></a>
+          <a href="productos.html"><img src="img/sliders/slider-4.webp" alt="Slider #4" /></a>
+        </figure>
+      </div>
+    </section>
+  </main>
+  <main id="grids-main">
+    <h5>Los mejores productos & Categorias</h5>
+    <hr class="grids-main-hr" />
+    <div class="accessories-highlight-main">
+      <div class="row">
+        <div class="col l3 m4 s6" data-aos="zoom-in" data-aos-duration="1000">
+          <a href="productos.html">
+              <h6 class="text-center">Oficina en casa</h6>
+            <img src="img/destacados/imagen-1.webp" class="destacados" alt="" />
+          </a>
+        </div>
+        <div class="col l3 m4 s6" data-aos="zoom-in" data-aos-duration="1000">
+          <a href="productos.html">
+            <h6 class="text-center">Tiendas oficiales</h6>
+            <img src="img/destacados/imagen-2.webp" class="destacados" alt="" />
+          </a>
+        </div>
+        <div class="col l3 m4 s6" data-aos="zoom-in" data-aos-duration="1000">
+          <a href="productos.html">
+            <h6 class="text-center">Renueva tu auto</h6>
+            <img src="img/destacados/imagen-3.webp" class="destacados" alt="" />
+          </a>
+        </div>
+        <div class="col l3 m4 s6" data-aos="zoom-in" data-aos-duration="1000">
+          <a href="productos.html">
+            <h6 class="text-center">Mejores regalos para navidad</h6>
+            <img src="img/destacados/imagen-4.webp" class="destacados" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <hr />
+  <article id="caracteristica">
+    <div class="caracteristica-tarjeta">
+      <img src="img/iconos/corazon.svg" alt="SVG de un corazon" />
+      <p>Compra sin moverte</p>
+      <span class="subtitulo">
+        Encuentra lo que necesitas, y coordina el pago y la entrega con el vendedor. Es fácil y rápido. ¡Todos podemos hacerlo!
+      </span>
+    </div>
+    <div class="vertical"></div>
+    <div class="caracteristica-tarjeta">
+      <img src="img/iconos/envios.svg" alt="" />
+      <p>Recibe tu producto</p>
+      <span class="subtitulo">
+        Acuerda la entrega de tu compra con el vendedor. Puedes recibirlo en tu casa, en la oficina o retirarlo. ¡Tú decides qué prefieres!
+      </span>
+    </div>
+    <div class="vertical"></div>
+    <div class="caracteristica-tarjeta">
+      <img src="img/iconos/seguridad.svg" alt="" />
+      <p>Pagos seguros</p>
+      <spaj class="subtitulo">
+        Paga en línea y recibe tu dinero en tu cuenta. ¡No hay problema!
+      </spaj>
+    </div>
+  </article>
+  <hr />
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Soporte</h5>
+          <p class="grey-text text-lighten-4 footer-address"></p>
+          <p>
+          <i class="fa fa-map-marker"></i> Dirección: Av. Universitaria #1234
+          </p>
+          <p class="footer-phone">
+            <p><i class="fa fa-phone"></i>Télefono +584121876543</p>
+          </p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Nuestras redes</h5>
+          <a class="grey-text text-lighten-3" target="_blank" href="https://www.facebook.com/"><i
+              class="fa fa-facebook"></i></a>
+          <a class="grey-text text-lighten-3" target="_blank" href="https://www.instagram.com/"><i
+              class="fa fa-instagram"></i></a>
+          <a class="grey-text text-lighten-3" target="_blank" href="https://www.twitter.com/"><i
+              class="fa fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="#" target="_blank">Copyright © 1999-2021 Comercy Lite.</a>
+        <a class="grey-text text-lighten-4 right" href="#!">info@comercy.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    AOS.init({});
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="js/autenticacion.js"></script>
+</body>
+
+</html>

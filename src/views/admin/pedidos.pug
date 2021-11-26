@@ -1,0 +1,45 @@
+extends ../layout/main
+block content
+    include ../includes/navbar
+    .contenedor    
+        h1.titulo Listado de pedidos actuales 
+            i.fas.fa-box-open
+    section.contenedor-home
+        if(!pedidos.length)
+            h1 No existen pedidos registrados actualmente
+        else
+            table(style="margin:0 auto;").table-pedido
+                thead
+                    tr
+                    th Cliente. Persona recibe
+                    th Precio
+                    th Producto
+                    th Imagen
+                    th Fecha
+                    th Tipo de pago. Referencia
+                    th Comprobante
+                    th Dirección. Telefono
+                    th Acción
+                tbody
+                     for pedido of pedidos
+                        tr
+                            td #{pedido.cliente_id}. #{pedido.persona_recibe}
+                            td $ 
+                                strong #{pedido.precio}
+                            td  #{pedido.producto_id}
+                            td  
+                                img(src=pedido.imagen width="50px")
+                            td  #{new Date(pedido.fecha_pedido).toLocaleDateString()}
+                            td  #{pedido.tipo_pago}. #{pedido.referencia || 'Sin referencia'}
+                            if(pedido.comprobante)
+                                td 
+                                    img(src=`http://localhost:3000/img/${pedido.comprobante}`, width="50px" alt="Comprobante") 
+                                    br
+                                    a(href=`http://localhost:3000/img/${pedido.comprobante}` target="_blank") Ver comprobante
+                            else 
+                                td Sin comprobante
+                            td #{pedido.ciudad}, #{pedido.estado}, #{pedido.direccion}. #{pedido.telefono_persona}
+                            td
+                                a.boton-accion.red(onClick="return confirm('¿Esta seguro en eliminar el pedido?')" href=`/admin/eliminar-pedido/${pedido.id}` ) Eliminar 
+                                    i.fas.fa-shopping-cart
+
