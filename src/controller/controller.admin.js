@@ -128,9 +128,9 @@ module.exports = {
     }
     try {
       await database.awaitQuery('DELETE FROM clientes WHERE id = ?', [id]);
-      res.redirect('/obtener-clientes');
+      res.redirect('/admin/obtener-clientes');
     } catch (error) {
-      res.redirect('/obtener-clientes');
+      res.redirect('/admin/obtener-clientes');
     }
   },
   obtenerPedidos: async (req, res) => {
@@ -163,9 +163,9 @@ module.exports = {
     try {
       const { pedidoId } = req.params;
       await database.awaitQuery('DELETE FROM pedidos WHERE id = ?', [pedidoId]);
-      res.redirect('/obtener-pedidos');
+      res.redirect('/admin/obtener-pedidos');
     } catch (error) {
-      res.redirect('/obtener-pedidos');
+      res.redirect('/admin/obtener-pedidos');
     }
   },
 };
